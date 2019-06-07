@@ -16,7 +16,7 @@ CImageManager::~CImageManager()
 	}
 	m_mapTexture.clear();
 	SAFE_RELEASE(m_pSprite);
-
+	
 }
 
 void CImageManager::Begin(bool isInterface)
@@ -25,7 +25,7 @@ void CImageManager::Begin(bool isInterface)
 	{
 		m_pSprite->Begin(D3DXSPRITE_ALPHABLEND);
 	}
-	else m_pSprite->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_OBJECTSPACE);
+	else { m_pSprite->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_OBJECTSPACE); }
 }
 
 void CImageManager::End()
@@ -144,23 +144,35 @@ vector<CTexture*> CImageManager::MakeVecTex(CONSTREF(string) _Key)
 }
 
 
-void CImageManager::RenderLine(Vector2 _vStart, Vector2 _vEnd, float _fWidth, D3DCOLOR _Color)
+void CImageManager::RenderLine(Vector2 _vStart, Vector2 _vEnd, float _fWidth, D3DCOLOR _Color, float _fRot, Vector2 _vCenter )
 {
-	Vector2 vPos[2] = { _vStart,_vEnd };
+	Vector3 vPos[2] = { {_vEnd.x - _vCenter.x ,_vEnd.y - _vCenter.y,1.f},{_vStart.x - _vCenter.x,_vStart.y - _vCenter.y,1.f} };
 	ID3DXLine *Line;
 
 	
-	//	Matrix a;
-//	D3DXMatrixRotationZ(&a, Math::DegToRad(70));
+	Matrix matWorld, matScale, matRotation, matTransformation;
+
+	D3DXMatrixScaling(&matScale, 1.f, 1.f, 1.f);
+
+	D3DXMatrixRotationZ(&matRotation, D3DXToRadian(_fRot));
+
+	D3DXMatrixTranslation(&matTransformation, (-(WINSIZEX/2) + _vCenter.x), (-(WINSIZEY/2.F) + _vCenter.y), 0.f);	
+	
+	matWorld = matScale * matRotation * matTransformation;
+
 	D3DXCreateLine(g_Device, &Line);
+
 	Line->SetWidth(_fWidth);
 
 	Line->SetAntialias(true);
+
 	Line->Begin(); 
-	//Line->DrawTransform(vPos, 2, &a, _Color);
-	Line->Draw(vPos, 2, _Color);
+
+	Line->DrawTransform(vPos, 2, &(matWorld * CAMERA.m_matProj), _Color);
+
 	Line->End();
-	Line->Release();
+
+	SAFE_RELEASE(Line);
 }
 
 void CImageManager::Render(
@@ -175,11 +187,11 @@ void CImageManager::Render(
 				   
 	Matrix matWorld, matScale, matRotation, matTransformation;
 
-	D3DXMatrixScaling(&matScale, _vScale.x, _vScale.y, 1.f);
+	D3DXMatrixScaling(&matScale, _vScale.x, _vScale.y, 0.f);
 
 	D3DXMatrixRotationZ(&matRotation, D3DXToRadian(_fDegree));
 	
-	D3DXMatrixTranslation(&matTransformation, _vPos.x, _vPos.y, 0.f);
+	D3DXMatrixTranslation(&matTransformation, _vPos.x, _vPos.y - 240, 0.f);
 
 	matWorld = matScale * matRotation * matTransformation;
 

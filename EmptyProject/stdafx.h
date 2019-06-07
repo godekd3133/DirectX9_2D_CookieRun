@@ -34,8 +34,8 @@ using Vector3 = D3DXVECTOR3;
 using Matrix = D3DXMATRIX;
 using TimePoint = system_clock::time_point;
 
-CONST FLOAT WINSIZEX = 1280.f;
-CONST FLOAT WINSIZEY = 720.f;
+CONST FLOAT WINSIZEX = 1280;
+CONST FLOAT WINSIZEY = 960;
 static bool WINDOWED = true;
 
 INT GetRandomNum(INT _Min, INT _Max);
@@ -56,7 +56,7 @@ void Lerp(T* target, const T& start, const T& end, float speed)
 #if _DEBUG || DEBUG
 #define DEBUG_LOG cout << endl; cout << "DEBUG_LOG :: "; printf        
 #else 
-#define DEUBG_LOG
+#define DEBUG_LOG cout << endl; cout << "DEBUG_LOG :: "; printf        
 #endif
 
 #ifndef SAFE_DELETE

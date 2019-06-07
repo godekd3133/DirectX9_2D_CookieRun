@@ -26,10 +26,10 @@ void CMainGame::Update()
 	TIME.Update();
 
 	INPUT.Update();
+	
+	CAMERA.Update();
 
 	OBJECT.Update();
-
-	CAMERA.Update();
 
 	SCENE.Update();
 }

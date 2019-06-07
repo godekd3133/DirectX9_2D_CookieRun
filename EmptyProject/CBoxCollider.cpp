@@ -34,19 +34,12 @@ void CBoxCollider::Update()
 
 void CBoxCollider::Render()
 {
-	Rect re = m_reBox;
-	re.Rotate(m_pObject->Translation->m_fRotation);
-	
+	Rect re = m_reRect;
 
-	//IMAGE.RenderLine(re.GetLT(), re.GetRT(), 2, D3DCOLOR_ARGB(255, 255, 255, 2));
-	//IMAGE.RenderLine(re.GetLT(), re.GetLB(), 2, D3DCOLOR_ARGB(255, 255, 255, 2));
-	//IMAGE.RenderLine(re.GetLB(), re.GetRB(), 2, D3DCOLOR_ARGB(255, 255, 255, 2));
-	//IMAGE.RenderLine(re.GetRT(), re.GetRB(), 2, D3DCOLOR_ARGB(255, 255, 255, 2));
-
-	IMAGE.RenderLine(re.GetLT(), Vector2(re.GetLT().x, re.GetLT().y +1.f), 20, D3DCOLOR_ARGB(255, 255, 255, 2));
-	IMAGE.RenderLine(re.GetRT(), Vector2(re.GetRT().x, re.GetRT().y +1.f), 29, D3DCOLOR_ARGB(255, 255, 255, 2));
-	IMAGE.RenderLine(re.GetLB(),Vector2(re.GetLB().x, re.GetLB().y +1.f), 20, D3DCOLOR_ARGB(255, 255, 255, 2));
-	IMAGE.RenderLine(re.GetRB(),Vector2(re.GetRB().x, re.GetRB().y +1.f), 20, D3DCOLOR_ARGB(255, 255, 255, 2));
+	IMAGE.RenderLine(re.GetLT(), Vector2(re.GetRT().x, re.GetRT().y),2, D3DCOLOR_ARGB(255, 255, 255, 2), m_pObject->Translation->m_fRotation,this->m_pObject->Translation->m_vPosition );
+	IMAGE.RenderLine(re.GetRT(), Vector2(re.GetRB().x, re.GetRB().y), 2, D3DCOLOR_ARGB(255, 255, 255, 2), m_pObject->Translation->m_fRotation,this->m_pObject->Translation->m_vPosition );
+	IMAGE.RenderLine(re.GetLB(), Vector2(re.GetLT().x, re.GetLT().y), 2, D3DCOLOR_ARGB(255, 255, 255, 2), m_pObject->Translation->m_fRotation,this->m_pObject->Translation->m_vPosition );
+	IMAGE.RenderLine(re.GetRB(), Vector2(re.GetLB().x, re.GetLB().y), 2, D3DCOLOR_ARGB(255, 255, 255, 2), m_pObject->Translation->m_fRotation,this->m_pObject->Translation->m_vPosition );
 
 }
 

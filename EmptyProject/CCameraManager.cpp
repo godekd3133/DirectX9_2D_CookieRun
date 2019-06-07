@@ -30,6 +30,7 @@ void CCameraManager::Update()
 
 	if (m_bShake == false)
 	{
+
 		Lerp(&m_vPos.y, m_vPos.y, 360.f, TIME.DeltaTime  * 2.f);
 	}
 	else  m_vPos += D3DXVECTOR2(rand() % (INT)(m_iShakePower)-(INT)(m_iShakePower / 2), rand() % (INT)(m_iShakePower)-(INT)(m_iShakePower / 2));

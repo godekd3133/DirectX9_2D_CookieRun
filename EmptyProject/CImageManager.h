@@ -26,7 +26,8 @@ public:
 		return FindTexture(_Key);
 	}
 
-	void RenderLine(Vector2 _vStart,Vector2 _vEnd, float _fWidth, D3DCOLOR _Color)
+	//RenderLine(시작위치,끝날위치,선넓이,컬러값,회전중심 (디폴트값 0,0)을 기준으로 회전각도,회전중심(기본값 0,0)
+	void RenderLine(Vector2 _vStart,Vector2 _vEnd, float _fWidth, D3DCOLOR _Color, float _fRot = 0.f, Vector2 _vCenter = Vector2(0,0))
 ; public:
 	void Render(
 		CTexture * _pTexture,

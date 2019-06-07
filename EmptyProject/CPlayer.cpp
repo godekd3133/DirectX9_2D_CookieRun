@@ -26,20 +26,11 @@ void CPlayer::Init()
 
 	this->AddComponent<CBoxCollider>()->Init();
 
-	
-	//this->GetComponent<CRenderer>()->
 }
 
 void CPlayer::Update()
 {
-	this->GetComponent<CBoxCollider>()->SetCollisionBox(this->GetComponent<CRenderer>()->m_rRect);
-
-	// DEBUG_LOG("player update");
-	//GetComponent<CCollider>()->Update(m_vPosition);
-	//_Animations[m_Status]->Update();
-	//this->Translation->m_vPosition.x =
-	//if (INPUT.KeyPress(VK_LEFT)) 
-	//if (INPUT.KeyPress(VK_RIGHT)) m_vPosition.x += 400 * TIME.DeltaTime;
+	this->GetComponent<CBoxCollider>()->SetCollisionBox(Rect(this->GetComponent<CRenderer>()->m_rRect));
 }
 
 void CPlayer::Render()

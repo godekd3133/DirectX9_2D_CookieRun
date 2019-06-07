@@ -92,13 +92,7 @@ Vector2 Math::GetUnitVector(Vector2 a)
 	return ret;
 }
 
-Vector2 Math::RotateVector(Vector2 _vCenter, Vector2 _vPoint, float _fDegree)
-{
-		float rad = Math::DegToRad(_fDegree);
-		float rx = (_vPoint.x - _vCenter.x)*cosf(rad) - (_vPoint.y - _vCenter.y)*sinf(rad) + _vCenter.x;
-		float ry = (_vPoint.x - _vCenter.x)*sinf(rad) + (_vPoint.y - _vCenter.y)*cosf(rad) + _vCenter.y;
-		return { rx , ry };
-}
+
 
 Math::Rect::Rect()
 {
@@ -131,35 +125,6 @@ Math::Rect::Rect(Vector2 _vVertex[4])
 	Bottom = _vVertex[2].y;
 }
 
-void Math::Rect::Rotate(float _fDegree)
-{
-	float rad = Math::DegToRad(_fDegree);
-
-	Vector2 _vVertex[4] = 
-	{
-	Math::RotateVector(GetCenter(), GetLT(),_fDegree),
-	Math::RotateVector(GetCenter(), GetRT(), _fDegree),
-	Math::RotateVector(GetCenter(), GetRB(),_fDegree),
-	Math::RotateVector(GetCenter(), GetLB(), _fDegree)
-	};
-	
-
-	//	float s = sinf(rad);
-	//float c = cosf(rad);
-
-
-	//Vector2 _vVertex[4];
-	//_vVertex[0] =	Vector2(GetLT().x * c - (GetLT().y * s), GetLT().x * s + (GetLT().y * c));
-	//_vVertex[1] =	Vector2(GetRT().x * c - (GetRT().y * s), GetRT().x * s + (GetRT().y * c));
-	//_vVertex[2] =	Vector2(GetRB().x * c - (GetRB().y * s), GetRB().x * s + (GetRB().y * c));
-	//_vVertex[3] =	Vector2(GetLB().x * c - (GetLB().y * s), GetLB().x * s + (GetLB().y * c));
-	//
-	Left = _vVertex[0].x;
-	Top = _vVertex[0].y;
-	Right = _vVertex[2].x;
-	Bottom = _vVertex[2].y;
-	//Rect::Rect(_vVertex);
-}
 
 Math::Rect::~Rect()
 {

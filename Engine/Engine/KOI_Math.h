@@ -35,7 +35,6 @@ namespace Math
 				(LONG)Bottom
 			};
 		}
-		void Rotate(float _fDegree);
 		Vector2 GetLT() { return Vector2(Left, Top); }
 		Vector2 GetRT() { return Vector2(Right, Top); }
 		Vector2 GetLB() { return Vector2(Left, Bottom); }
@@ -73,7 +72,5 @@ namespace Math
 	//unit vector
 	Vector2 GetUnitVector(Vector2 a);
 
-	Vector2 RotateVector(Vector2 _vCenter,
-		Vector2 _vPoint,
-		float _fDegree);
+
 }
